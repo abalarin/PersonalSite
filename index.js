@@ -16,11 +16,16 @@ var app = connect()
 http.createServer(app).listen(3000);
 
 function serve (req, res) {
-  console.log(req.url);
+  var email = req.body.email;
+  var message = req.body.message;
+  if(email && message){
+    console.log(req.body.email);
+    console.log(req.body.message);
+  }
   render(res, req.url);
 }
 
-function render (res, view){
+function render (res, view, model){
   ejs.renderFile("templates/" + view + ".ejs",
     function(err, result){
       if(!err)
