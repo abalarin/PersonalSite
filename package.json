@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "description": "personal site",
+  "main": "index.js",
+  "author": "austin balarin",
+  "dependencies": {
+    "connect": "*",
+    "morgan":"*",
+    "ejs": "*",
+    "serve-static" :"*",
+    "body-parser":"*",
+    "express-session": "*"
+
+  }
+}

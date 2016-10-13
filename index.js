@@ -1,0 +1,32 @@
+var connect = require("connect");
+var logger = require("morgan");
+var http = require("http");
+var ejs = require('ejs');
+var bodyparse = require('body-parser');
+var serve_static = require("serve-static");
+var ex_session = require('express-session');
+
+
+var app = connect()
+    .use (logger('dev'))
+    .use (bodyparse())
+    .use (serve_static(__dirname + '/public'))
+    .use (serve);
+
+http.createServer(app).listen(3000);
+
+function serve (req, res) {
+  console.log(req.url);
+  render(res, req.url);
+}
+
+function render (res, view){
+  ejs.renderFile("templates/" + view + ".ejs",
+    function(err, result){
+      if(!err)
+        res.end(result);
+      else {
+        res.end("ERROR 404")
+      }
+    });
+}
