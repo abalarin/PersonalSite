@@ -14,7 +14,7 @@ var app = connect()
     .use (serve);
 
 http.createServer(app).listen(3000);
-
+3
 function serve (req, res) {
   var email = req.body.email;
   var message = req.body.message;
@@ -25,13 +25,15 @@ function serve (req, res) {
   render(res, req.url);
 }
 
-function render (res, view, model){
+function render (res, view){
   ejs.renderFile("templates/" + view + ".ejs",
     function(err, result){
       if(!err)
         res.end(result);
       else {
-        res.end("ERROR 404")
+        render(res, "404");
+
+//        ejs.renderFile("templates/404.ejs")
       }
     });
 }
