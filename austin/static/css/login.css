@@ -2,7 +2,7 @@
   --input-padding-x: .75rem;
   --input-padding-y: .75rem;
 }
-.body {
+/* .body {
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
@@ -12,7 +12,7 @@
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
-}
+} */
 
 .form-signin {
   width: 100%;
