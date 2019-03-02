@@ -1,0 +1,12 @@
+# Atom package manager
+venv
+
+austin.egg-info
+
+# PennPy/config.py
+
+# Ignore cached data
+austin/__init__.pyc
+austin/__pycache__
+austin/endpoints/__pycache__
+austin/endpoints/main/__pycache__
