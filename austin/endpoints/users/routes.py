@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from passlib.hash import sha256_crypt
 
-from austin.models.user_models import User
+from austin.models import User
 
 users = Blueprint('users', __name__)
 
