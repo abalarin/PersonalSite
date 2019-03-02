@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 
 main = Blueprint('main', __name__)
 
@@ -6,8 +6,3 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     return render_template('index.htm')
-
-
-@main.route('/login')
-def login():
-    return render_template('users/login.htm')

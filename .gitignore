@@ -2,6 +2,7 @@
 venv
 
 austin.egg-info
+setup.cfg
 
 # PennPy/config.py
 
