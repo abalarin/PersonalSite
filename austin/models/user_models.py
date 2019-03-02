@@ -5,7 +5,10 @@ from austin import db, login_manager
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    try:
+        return User.query.get(int(user_id))
+    except:
+        return None
 
 
 class User(db.Model, UserMixin):
