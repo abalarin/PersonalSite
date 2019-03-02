@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from passlib.hash import sha256_crypt
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
-from austin import db
-from austin.models.user_models import User
+from austin import db, User
+# from austin.models.user_models import User
 
 from .forms import RegistrationForm
 from .utils import user_exsists
@@ -11,33 +11,8 @@ from .utils import user_exsists
 users = Blueprint('users', __name__)
 
 
-@users.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'GET':
-        return render_template('users/login.html')
-
-    else:
-        email = request.form.get('email')
-        password_candidate = request.form.get('password')
-
-        # Query for a user with the provided username
-        result = User.query.filter_by(email=email).first()
-
-        # If a user exsists and passwords match - login
-        if result is not None and sha256_crypt.verify(password_candidate, result.password):
-
-            # Init session vars
-            login_user(result)
-
-            flash('Successful Login!', 'success')
-            return redirect(url_for('main.index'))
-
-        else:
-            flash('Incorrect Login!', 'danger')
-            return redirect(url_for('main.index'))
-
-
 @users.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     flash('You have logged out!', 'success')
