@@ -1,8 +1,0 @@
-setup.py
-austin/__init__.py
-austin/config.py
-austin.egg-info/PKG-INFO
-austin.egg-info/SOURCES.txt
-austin.egg-info/dependency_links.txt
-austin.egg-info/requires.txt
-austin.egg-info/top_level.txt
