@@ -9,5 +9,6 @@ setup(
         'flask-sqlalchemy',
         'flask-security',
         'psycopg2',
+        'configparser',
     ]
 )
