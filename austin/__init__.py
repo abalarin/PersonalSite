@@ -5,6 +5,16 @@ from flask_login import LoginManager
 
 from austin.config import Config
 
+from austin.boto3.objects import *
+from austin.boto3.configer import getConfig
+from austin.boto3.authBoto import botoClient, botoResource
+
+config = getConfig(Config.APP_ROOT + '/boto3/config.ini')
+client = botoClient(config['object_api']['access_key'], config['object_api']
+                  ['secret_key'], config['object_api']['base_url'], config['object_api']['user'])
+resource = botoResource(config['object_api']['access_key'], config['object_api']
+                  ['secret_key'], config['object_api']['base_url'], config['object_api']['user'])
+
 db = SQLAlchemy()
 login_manager = LoginManager()
 
@@ -20,8 +30,10 @@ def create_app(class_config=Config):
 
     from austin.endpoints.main.routes import main
     from austin.endpoints.users.routes import users
+    from austin.endpoints.gallery.routes import gallery
 
     app.register_blueprint(main)
     app.register_blueprint(users)
+    app.register_blueprint(gallery)
 
     return app

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
 
 <div class="container-fluid">
   <div class="row">
@@ -15,5 +15,11 @@
   </div>
 </div>
 
+<div class="container-fluid">
+
+  <h2>Linodes Object Storage:</h2>
+  {% include 'includes/_albums.html' %}
+
+</div>
 
 {% endblock %}

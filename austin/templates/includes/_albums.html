@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/gallery.css') }}">
+
+<div class="container">
+  <div class="row">
+    {% for album in albums %}
+    <div class="col-md-4" id="image_container">
+      <a href="/{{album['Name']}}/images">
+        <img src="{{album['images'][0]}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';">
+      </a>
+    </div>
+    {% endfor %}
+
+    {% if current_user.is_authenticated %}
+    <div class="col-md-4 column upload">
+      <a href="/create/album">
+        <img src="/static/images/upload.png">
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>

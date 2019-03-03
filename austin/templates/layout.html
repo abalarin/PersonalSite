@@ -18,7 +18,7 @@
 <body>
 
   <!-- Import Global CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/global.css') }}">
 
   <!-- Import navbar component -->
   {% include 'includes/_navbar.html' %}
@@ -29,6 +29,10 @@
     <!-- Loads and renders content blocks of the template -->
     {% block content %} {% endblock %}
   </div>
+
+
+  <!-- Import navbar component -->
+  {% include 'includes/_footer.html' %}
 
 
   <!-- Bootstrap Javascripts -->
