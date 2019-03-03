@@ -10,10 +10,8 @@ from austin.boto3.configer import getConfig
 from austin.boto3.authBoto import botoClient, botoResource
 
 config = getConfig(Config.APP_ROOT + '/boto3/config.ini')
-client = botoClient(config['object_api']['access_key'], config['object_api']
-                  ['secret_key'], config['object_api']['base_url'], config['object_api']['user'])
-resource = botoResource(config['object_api']['access_key'], config['object_api']
-                  ['secret_key'], config['object_api']['base_url'], config['object_api']['user'])
+client = botoClient(Config.BOTO_KEY, Config.BOTO_SECRET, config['object_api']['base_url'], config['object_api']['user'])
+resource = botoResource(Config.BOTO_KEY, Config.BOTO_SECRET, config['object_api']['base_url'], config['object_api']['user'])
 
 db = SQLAlchemy()
 login_manager = LoginManager()

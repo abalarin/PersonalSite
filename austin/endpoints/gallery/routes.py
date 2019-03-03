@@ -7,6 +7,14 @@ from .utils import *
 
 gallery = Blueprint('gallery', __name__)
 
+@gallery.route('/buckets', methods=['GET'])
+def get_buckets():
+    try:
+        results = listAlbums(client)
+        return jsonify(results)
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "There was a problem with the data you provided."})
 
 @gallery.route('/create/album', methods=['GET'])
 @login_required

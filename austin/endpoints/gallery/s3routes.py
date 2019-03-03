@@ -1,7 +1,8 @@
+#
+#  Not in use: These are some sample endpoints for CRUD functions of object Storage 
+#
+
 from flask import Blueprint, render_template, jsonify, request
-import shutil
-import json
-import io
 
 from austin import client, resource
 

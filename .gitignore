@@ -4,7 +4,7 @@ venv
 austin.egg-info
 setup.cfg
 
-austin/config.py
+# austin/config.py
 
 # Ignore cached data
 austin/__init__.pyc
@@ -12,5 +12,8 @@ austin/__pycache__
 austin/endpoints/__pycache__
 austin/endpoints/main/__pycache__
 austin/endpoints/users/__pycache__
+austin/endpoints/gallery/__pycache__
+
+austin/boto3/__pycache__
 
 austin/models/__pycache__
