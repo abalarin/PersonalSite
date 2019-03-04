@@ -14,6 +14,6 @@ austin/endpoints/main/__pycache__
 austin/endpoints/users/__pycache__
 austin/endpoints/gallery/__pycache__
 
-austin/boto3/__pycache__
+austin/botoConfig/__pycache__
 
 austin/models/__pycache__

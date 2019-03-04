@@ -1,5 +1,5 @@
 #
-#  Not in use: These are some sample endpoints for CRUD functions of object Storage 
+#  Not in use: These are some sample endpoints for CRUD functions of object Storage
 #
 
 from flask import Blueprint, render_template, jsonify, request
@@ -8,7 +8,7 @@ from austin import client, resource
 
 # BOTO STUFF
 import boto3
-from austin.boto3.objects import *
+from austin.botoConfig.objects import *
 
 
 gallery = Blueprint('gallery', __name__)

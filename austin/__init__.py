@@ -5,11 +5,10 @@ from flask_login import LoginManager
 
 from austin.config import Config
 
-from austin.boto3.objects import *
-from austin.boto3.configer import getConfig
-from austin.boto3.authBoto import botoClient, botoResource
+from austin.botoConfig.configer import getConfig
+from austin.botoConfig.authBoto import botoClient, botoResource
 
-config = getConfig(Config.APP_ROOT + '/boto3/config.ini')
+config = getConfig(Config.APP_ROOT + '/botoConfig/config.ini')
 client = botoClient(Config.BOTO_KEY, Config.BOTO_SECRET, config['object_api']['base_url'], config['object_api']['user'])
 resource = botoResource(Config.BOTO_KEY, Config.BOTO_SECRET, config['object_api']['base_url'], config['object_api']['user'])
 
