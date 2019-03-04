@@ -6,18 +6,20 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <img class="profile" src="{{ url_for('static', filename='images/IMG_3844.jpg') }}" alt="">
+      <img class="profile" src="{{ url_for('static', filename='images/cover.jpg') }}" alt="">
     </div>
-    <div class="col text-center">
+    <div class="col align-self-center text-center">
       <h1>Welcome!</h1>
-      <p>This is my site</p>
+      <br>
+      <h2>This is my site</h2>
+      <h4 class="text-muted">"I'd have to say my biggest accomplishment to date would have to be the stash..."</h4>
     </div>
   </div>
 </div>
 
-<div class="container-fluid">
-
-  <h2>Linodes Object Storage:</h2>
+<div class="container-fluid homepage">
+  <br>
+  <h2 class="text-center">Linodes Object Storage:</h2>
   {% include 'includes/_albums.html' %}
 
 </div>
