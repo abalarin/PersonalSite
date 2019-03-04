@@ -1,5 +1,5 @@
-from austin.models.user_models import User
-
+# from austin.models.user_models import User
+from austin import User
 
 # Check if username or email are already taken
 def user_exsists(username, email):
