@@ -10,5 +10,6 @@ setup(
         'flask-security',
         'psycopg2',
         'configparser',
+        'requests',
     ]
 )

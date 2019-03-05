@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/gallery.css') }}">
 
 <div class="container homepage" data-spy="scroll" data-target="#navbar-thing">
-  <div class="row" id="albums">
+  <div class="row">
     {% for album in albums %}
     <div class="col-md-4 fader" id="image_container">
       <h3 class="text-center text-muted">{{album['Name']}}</h3>

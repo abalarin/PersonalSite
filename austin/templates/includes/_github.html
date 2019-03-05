@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/github.css') }}">
+
+<div class="container-fluid">
+
+  {% for change in changelog %}
+  <div class="row">
+
+    {% if loop.index <= 10 %}
+
+    <div class="card container-fluid">
+      <div class="row no-gutters">
+        <div class="col avatar">
+          <img id="github_avatar" src="{{change.actor.avatar_url}}" alt="">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5>
+              <a href="{{change.actor.url}}">{{change.actor.display_login}}</a>
+              acted on
+              <a href="{{change.repo.url}}">{{change.repo.name}}</a>
+            </h5>
+            <p class="card-text"><small class="text-muted">Last updated {{change.created_at}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+  </div>
+  {% endfor %}
+
+  <div class="text-center">
+    <h3> <a href="/changelog"> See More... </a></h3>
+  </div>
+
+</div>

@@ -19,5 +19,8 @@ class Config():
     BOTO_KEY = os.environ.get('BOTO_KEY')
     BOTO_SECRET = os.environ.get('BOTO_SECRET')
 
+    # Github OAuth
+    GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+
     # Gets pwd and declares it is the root dir for the App
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
