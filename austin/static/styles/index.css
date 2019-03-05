@@ -16,3 +16,20 @@ hr {
 br {
   margin-bottom: 15px;
 }
+
+#videosList {
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.video {
+  /* background-image: url('http://127.0.0.1:5000/static/images/videocover.jpg'); */
+  height: 330px;
+  width: 600px;
+  margin-bottom: 50px;
+}
+
+/* Hide Play button + controls on iOS */
+video::-webkit-media-controls {
+  display: none !important;
+}

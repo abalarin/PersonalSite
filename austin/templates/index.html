@@ -2,6 +2,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+<script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 
 <div class="container-fluid">
   <div class="row">
@@ -25,6 +26,20 @@
   <h2 class="text-center">My Linode Object Storage Albums</h2>
   <br>
   {% include 'includes/_albums.html' %}
+
+  <br>
+  <div class="row justify-content-md-center">
+
+    <div id="videosList">
+      <div class="video">
+        <video class="thevideo" onmouseover="this.play();this.muted = true" onmouseout="this.pause();">
+          <source src="/static/media/video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+  </div>
 
   <hr>
 

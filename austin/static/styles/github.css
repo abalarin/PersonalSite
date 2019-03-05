@@ -16,11 +16,11 @@ hr {
 }
 
 .avatar {
-  max-width: 100px;
-  padding: 10px;
+  max-width: 80px;
+  padding: 20px;
 }
 
 #github_avatar {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
