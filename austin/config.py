@@ -24,3 +24,8 @@ class Config():
 
     # Gets pwd and declares it is the root dir for the App
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    # Spotify Stuff
+    SPOTIFY_REDIRECT = os.environ.get('SPOTIFY_REDIRECT')
+    SPOTIFY_ID = os.environ.get('SPOTIFY_ID')
+    SPOTIFY_SECRET = os.environ.get('SPOTIFY_SECRET')
