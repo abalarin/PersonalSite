@@ -59,7 +59,7 @@ def get_recently_played(SPOTIFY_CODE):
 
     code = "&code=" + SPOTIFY_CODE
     grant_type = "grant_type=authorization_code"
-    redirect_uri = "&redirect_uri=http://127.0.0.1:5000/callback/"
+    redirect_uri = "&redirect_uri=" + Config.SPOTIFY_REDIRECT
     client_id = "&client_id=" + Config.SPOTIFY_ID
     client_secret = "&client_secret=" + Config.SPOTIFY_SECRET
 

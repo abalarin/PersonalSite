@@ -11,5 +11,6 @@ setup(
         'psycopg2',
         'configparser',
         'requests',
+        'urllib',
     ]
 )
