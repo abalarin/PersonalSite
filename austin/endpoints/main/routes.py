@@ -46,7 +46,7 @@ def spotify():
     payload = {
         'response_type': 'code',
         'client_id': Config.SPOTIFY_ID,
-        'redirect_uri': 'http://127.0.0.1:5000/callback/',
+        'redirect_uri': Config.SPOTIFY_REDIRECT,
         'scope': 'user-read-recently-played'
     }
     response = requests.get(
