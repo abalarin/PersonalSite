@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
-import requests
-import datetime
 from dateutil import parser, tz
+import datetime
+import requests
 
 from austin.endpoints.gallery.routes import *
 from austin import Config
@@ -21,14 +21,6 @@ def change_log():
     return render_template('changelog/github.html', changelog=github_feed)
 
 
-# Return 5 of the most recent Github Actions
-def github_feed():
-    github_feed = requests.get(
-        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN + '&per_page=5').json()
-
-    return github_feed
-
-
 @main.app_errorhandler(401)
 @main.app_errorhandler(403)
 @main.app_errorhandler(404)
@@ -37,6 +29,13 @@ def github_feed():
 def error_404(error):
     return render_template('404.html', e=error)
 
+
+# Return 5 of the most recent Github Actions
+def github_feed():
+    github_feed = requests.get(
+        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN + '&per_page=5').json()
+
+    return github_feed
 
 # This is too slow - optimize
 @main.context_processor
