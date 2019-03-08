@@ -22,9 +22,9 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5>
-              <a href="{{change.actor.url}}">{{change.actor.display_login}}</a>
+              <a href="{{get_json_from(change.actor.url).html_url}}">{{change.actor.display_login}}</a>
               acted on
-              <a href="{{change.repo.url}}">{{change.repo.name}}</a>
+              <a href="{{get_json_from(change.repo.url).html_url}}">{{change.repo.name}}</a>
             </h5>
             <p class="card-text"><small class="text-muted">Last updated {{change.created_at}}</small></p>
           </div>
