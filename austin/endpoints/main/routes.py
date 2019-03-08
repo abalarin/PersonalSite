@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template
+from dateutil import parser, tz
+import datetime
+
 import requests
 import json
 from urllib.parse import urlparse
@@ -22,64 +25,6 @@ def change_log():
     return render_template('changelog/github.html', changelog=github_feed)
 
 
-@main.route('/changelog1')
-def github_feed():
-
-    github_feed = requests.get(
-        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN).json()
-
-    return github_feed
-
-
-@main.route('/callback/')
-def callback():
-
-    code = urlparse(request.url).query[5:]
-    print("code=" + code)
-    recently_played = get_recently_played(code)
-    # return(recently_played)
-    return render_template('index.html', albums=get_albums(), changelog=github_feed(), recently_played=recently_played)
-
-
-@main.route('/spotify')
-def spotify():
-    payload = {
-        'response_type': 'code',
-        'client_id': Config.SPOTIFY_ID,
-        'redirect_uri': Config.SPOTIFY_REDIRECT,
-        'scope': 'user-read-recently-played'
-    }
-    response = requests.get(
-        'https://accounts.spotify.com/authorize', params=payload)
-    print(response.text)
-    return redirect(response.url)
-
-
-def get_recently_played(SPOTIFY_CODE):
-
-    code = "&code=" + SPOTIFY_CODE
-    grant_type = "grant_type=authorization_code"
-    redirect_uri = "&redirect_uri=" + Config.SPOTIFY_REDIRECT
-    client_id = "&client_id=" + Config.SPOTIFY_ID
-    client_secret = "&client_secret=" + Config.SPOTIFY_SECRET
-
-    payload = grant_type + code + redirect_uri + client_id + client_secret
-
-    headers = { 'Content-Type': "application/x-www-form-urlencoded" }
-    response = requests.post("https://accounts.spotify.com/api/token", data=payload, headers=headers)
-    print(response)
-
-    print("------------------SPOTIFY-------------------------")
-    url = "https://api.spotify.com/v1/me/player/recently-played"
-
-    headers = {
-        'Authorization': "Bearer " + json.loads(response.text)['access_token']
-        }
-
-    music = requests.get(url, data="", headers=headers)
-    # print(music.text)
-    return json.loads(music.text)
-
 
 @main.app_errorhandler(401)
 @main.app_errorhandler(403)
@@ -88,3 +33,60 @@ def get_recently_played(SPOTIFY_CODE):
 @main.app_errorhandler(500)
 def error_404(error):
     return render_template('404.html', e=error)
+
+
+# Return 5 of the most recent Github Actions
+def github_feed():
+    github_feed = requests.get(
+        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN + '&per_page=5').json()
+
+    return github_feed
+
+# This is too slow - optimize
+@main.context_processor
+def jinja_api_caller():
+    def get_json_from(url):
+        return requests.get(url + '?access_token=' + Config.GITHUB_TOKEN).json()
+    return dict(get_json_from=get_json_from)
+
+# Date-Time Parser
+@main.context_processor
+def jinja_time_parger():
+    def date_convert(date_time):
+
+        # This assumes datetime is coming from Zulu/UTC zone & convert to EST
+        from_zone = tz.gettz('UTC')
+        to_zone = tz.gettz('America/New_York')
+
+        # Get Current Time
+        time_now = datetime.datetime.now()
+
+        # Parse given time into datetime type, convert to EST time
+        old_time = parser.parse(date_time)
+        old_time = old_time.replace(tzinfo=from_zone).astimezone(to_zone)
+
+        # Remove the timezone awareness to calculate time difference
+        old_time = old_time.replace(tzinfo=None)
+        time_difference = (time_now - old_time).total_seconds()
+
+        if time_difference < 60:
+            return(str(int(time_difference)) + " seconds ago")
+
+        elif time_difference < 3600:
+            if time_difference < 120:
+                return(str(int(time_difference / 60)) + " minute ago")
+            else:
+                return(str(int(time_difference / 60)) + " minutes ago")
+
+        elif time_difference < 86400:
+            if time_difference < 7200:
+                return(str(int((time_difference / 60) / 60)) + " hour ago")
+            else:
+                return(str(int((time_difference / 60) / 60)) + " hours ago")
+        else:
+            if time_difference < 172800:
+                return(str(int(((time_difference / 60) / 60) / 24)) + " day ago")
+            else:
+                return(str(int(((time_difference / 60) / 60) / 24)) + " days ago")
+
+    return dict(date_convert=date_convert)
