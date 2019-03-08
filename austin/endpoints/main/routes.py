@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template
 from dateutil import parser, tz
 import datetime
+
 import requests
+import json
+from urllib.parse import urlparse
 
 from austin.endpoints.gallery.routes import *
 from austin import Config
@@ -11,7 +14,8 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html', albums=get_albums(), changelog=github_feed())
+    # return render_template('index.html', albums=get_albums(), changelog=github_feed())
+    return redirect(url_for('main.spotify'))
 
 
 @main.route('/changelog')
@@ -19,6 +23,7 @@ def change_log():
     github_feed = requests.get(
         'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN).json()
     return render_template('changelog/github.html', changelog=github_feed)
+
 
 
 @main.app_errorhandler(401)
