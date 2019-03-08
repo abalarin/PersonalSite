@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template
 import requests
-import datetime
-from dateutil import parser
 
 from austin.endpoints.gallery.routes import *
 from austin import Config
