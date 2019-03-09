@@ -3,14 +3,23 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/gallery.css') }}">
 
-<div class="container">
-  <div class="row">
-    {% for link in links %}
-    <div class="col-md-4" id="image_container">
+<div class="card-columns">
+  {% for link in links %}
+  <div class="card" id="image_container">
+    <a data-toggle="modal" data-target="#exampleModalLong{{loop.index}}">
       <img alt="picture" src="{{link}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';">
-    </div>
-    {% endfor %}
+    </a>
   </div>
-</div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <img alt="picture" src="{{link}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';">
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
 {% endblock %}
