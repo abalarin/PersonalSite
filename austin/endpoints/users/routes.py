@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from passlib.hash import sha256_crypt
 from flask_login import login_user, logout_user, login_required
+from passlib.hash import sha256_crypt
 
 from austin import db, User
 # from austin.models.user_models import User

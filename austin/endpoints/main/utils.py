@@ -74,7 +74,7 @@ def spotify_feed(limit):
 
     # Check if the Access Token is not expired, if not KeyError will be thrown
     try:
-        if response['error']['message'] == 'Invalid access token':
+        if response['error']:
             headers = {
                 'Authorization': "Bearer " + reauth_spotify()
             }
