@@ -7,4 +7,3 @@
 // function hideVideo() {
 //     $('video', this).get(0).pause();
 // }
-console.log("print")
