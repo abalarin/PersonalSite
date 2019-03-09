@@ -23,7 +23,11 @@ def create_app(class_config=Config):
 
     # Init app contenxts
     db.init_app(app)
+
+    login_manager = LoginManager()
     login_manager.init_app(app)
+    from austin.models.user_models import load_user
+    login_manager.user_loader(load_user)
 
     from austin.endpoints.main.routes import main
     from austin.endpoints.users.routes import users
