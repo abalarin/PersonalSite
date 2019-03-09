@@ -4,46 +4,43 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/github.css') }}">
 
 <div class="container-fluid">
+
   <div class="text-center">
 
     <h2>These are my tastes</h2>
     <h4 class="text-muted">Want to see what I've been listening to?</h4>
+    <br>
   </div>
-  <hr>
-  <!-- <p>{{recently_played.items}}</p>
-  <p>{{recently_played}}</p> -->
 
   <div class="row">
+    {% for item in recently_played['items'] %}
     <div class="card container-fluid">
-      {% for item in recently_played['items'] %}
       <div class="row no-gutters">
         <div class="col avatar">
           <img id="github_avatar" src="{{item['track']['album']['images'][0]['url']}}" alt="">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h4>
+            <h5>
               <a href="{{item['track']['external_urls']['spotify']}}">
                 {{item['track']['name']}}
               </a>
-            </h4>
-            <h5>
+            </h5>
+            <h6>
               <a href="{{item['track']['album']['artists'][0]['external_urls']['spotify']}}">
                 {{item['track']['album']['artists'][0]['name']}}
               </a>
-            </h5>
-            <!-- <p>{{item['track']['album']}}</p> -->
-            <!-- <p>{{item}}</p> -->
+            </h6>
+
+            <p class="card-text"><small class="text-muted">Listend  {{date_convert(item['played_at'])}}</small></p>
           </div>
         </div>
       </div>
-      {% endfor %}
-    </div>
-
-    <hr>
+  </div>
+  {% endfor %}
 
   </div>
-  <hr>
+
 </div>
 
 {% endblock %}

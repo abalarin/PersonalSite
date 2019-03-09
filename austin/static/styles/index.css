@@ -23,7 +23,6 @@ br {
 }
 
 .video {
-  /* background-image: url('http://127.0.0.1:5000/static/images/videocover.jpg'); */
   height: 330px;
   width: 600px;
   margin-bottom: 50px;
