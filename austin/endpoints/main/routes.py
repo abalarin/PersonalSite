@@ -16,29 +16,17 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html', albums=get_albums(), changelog=github_feed(), recently_played=spotify_feed(5))
-
-
-def spotify_feed(limit):
-    url = "https://api.spotify.com/v1/me/player/recently-played"
-
-    headers = {
-        'Authorization': "Bearer " + Configuration.query.get(1).spotify_code
-    }
-
-    querystring = { "limit" : "5" }
-    music = requests.get(url, data="", headers=headers, params=querystring)
-    print(('spotify: ' , music))
-
-    return(json.loads(music.text))
+    return render_template('index.html', albums=get_albums(), changelog=github_feed(5), recently_played=spotify_feed(5))
 
 
 @main.route('/changelog')
 def change_log():
-    github_feed = requests.get(
-        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN).json()
-    return render_template('changelog/github.html', changelog=github_feed)
+    return render_template('activity/github.html', changelog=github_feed(5))
 
+
+@main.route('/music')
+def music():
+    return render_template('activity/spotify.html', recently_played=spotify_feed(50))
 
 @main.route('/spotify')
 @login_required
@@ -61,28 +49,7 @@ def callback():
     code = urlparse(request.url).query[5:]
     authenticate_spotify(code)
 
-    return render_template('index.html', albums=get_albums(), changelog=github_feed(), recently_played='spotify_feed()')
-
-
-# Gets new spotify bearer token
-def authenticate_spotify(SPOTIFY_CODE):
-
-    code = "&code=" + SPOTIFY_CODE
-    grant_type = "grant_type=authorization_code"
-    redirect_uri = "&redirect_uri=" + Config.SPOTIFY_REDIRECT
-    client_id = "&client_id=" + Config.SPOTIFY_ID
-    client_secret = "&client_secret=" + Config.SPOTIFY_SECRET
-
-    payload = grant_type + code + redirect_uri + client_id + client_secret
-
-    headers = {'Content-Type': "application/x-www-form-urlencoded"}
-    url = 'https://accounts.spotify.com/api/token'
-    response = requests.post(url, data=payload, headers=headers)
-    access_token = json.loads(response.text)['access_token']
-
-    config = Configuration.query.get(1)
-    config.spotify_code = access_token
-    db.session.commit()
+    return render_template('index.html', albums=get_albums(), changelog=github_feed(5), recently_played=spotify_feed(5))
 
 
 @main.app_errorhandler(401)
@@ -94,10 +61,50 @@ def error_404(error):
     return render_template('404.html', e=error)
 
 
-# Return 5 of the most recent Github Actions
-def github_feed():
+# Gets new spotify bearer token
+def authenticate_spotify(SPOTIFY_CODE):
+
+    # Build out spotify authentication POST
+    code = "&code=" + SPOTIFY_CODE
+    grant_type = "grant_type=authorization_code"
+    redirect_uri = "&redirect_uri=" + Config.SPOTIFY_REDIRECT
+    client_id = "&client_id=" + Config.SPOTIFY_ID
+    client_secret = "&client_secret=" + Config.SPOTIFY_SECRET
+
+    payload = grant_type + code + redirect_uri + client_id + client_secret
+
+    headers = {'Content-Type': "application/x-www-form-urlencoded"}
+    url = 'https://accounts.spotify.com/api/token'
+
+    # Once authenticated, Bearer Token will be returned for User data access
+    response = requests.post(url, data=payload, headers=headers)
+    access_token = json.loads(response.text)['access_token']
+
+    # Update Site Configuration Table with Spotify Bearer Token
+    config = Configuration.query.get(1)
+    config.spotify_code = access_token
+    db.session.commit()
+
+
+# Return # of the most recent Spotify Songs Played
+def spotify_feed(limit):
+    url = "https://api.spotify.com/v1/me/player/recently-played"
+
+    headers = {
+        'Authorization': "Bearer " + Configuration.query.get(1).spotify_code
+    }
+
+    querystring = {"limit": str(limit)}
+    music = requests.get(url, data="", headers=headers, params=querystring)
+    print(('spotify: ', music))
+
+    return(json.loads(music.text))
+
+
+# Return # of the most recent Github Actions
+def github_feed(limit):
     github_feed = requests.get(
-        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN + '&per_page=5').json()
+        'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN + '&per_page=' + str(limit)).json()
 
     return github_feed
 
