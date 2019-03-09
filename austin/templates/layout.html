@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <title>Austin</title>
-
+  <!-- Import Global CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/global.css') }}">
+  
   <!-- Archivo Font  -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -20,9 +22,6 @@
 </head>
 
 <body class="body">
-
-  <!-- Import Global CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/global.css') }}">
 
   <!-- Import navbar component -->
   {% include 'includes/_navbar.html' %}
