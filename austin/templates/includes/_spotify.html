@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    {% for item in recently_played['items'] %}
+    {% if loop.index <= 10 %}
+    <div class="card container-fluid">
+      <div class="row no-gutters">
+        <div class="col avatar">
+          <img id="github_avatar" src="{{item['track']['album']['images'][0]['url']}}" alt="">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5>
+              <a href="{{item['track']['external_urls']['spotify']}}">
+                {{item['track']['name']}}
+              </a>
+            </h5>
+            <h6>
+              <a href="{{item['track']['album']['artists'][0]['external_urls']['spotify']}}">
+                {{item['track']['album']['artists'][0]['name']}}
+              </a>
+            </h6>
+
+            <p class="card-text"><small class="text-muted">Listend  {{date_convert(item['played_at'])}}</small></p>
+          </div>
+        </div>
+      </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  </div>
+
+  <div class="text-center">
+    <h4 class="text-center"> <a href="#"> See More... </a></h4>
+  </div>
+
+</div>
