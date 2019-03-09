@@ -1,13 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
-<script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+
+<link rel="stylesheet" href="static/styles/index.css">
+<script src="static/scripts/index.js"></script>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <img class="profile" src="{{ url_for('static', filename='images/cover.png') }}" alt="">
+      <img class="profile" src="static/images/cover.png" alt="">
     </div>
     <div class="col align-self-center text-center">
       <h1>Welcome!</h1>

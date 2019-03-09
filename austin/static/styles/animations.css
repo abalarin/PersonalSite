@@ -1,0 +1,33 @@
+.animate-in {
+  position: relative;
+  animation: animatein 0.4s;
+}
+
+@keyframes animatein {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.animate-out img{
+  position: relative;
+  animation: animateout 0.7s;
+}
+
+@keyframes animateout {
+  from {
+    bottom: 0px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: -300px;
+    opacity: 0;
+  }
+}

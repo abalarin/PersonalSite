@@ -1,0 +1,10 @@
+.bitmoji {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.bitmoji img {
+  width: 150px;
+}

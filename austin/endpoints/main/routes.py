@@ -74,6 +74,7 @@ def jinja_api_caller():
         return requests.get(url + '?access_token=' + Config.GITHUB_TOKEN).json()
     return dict(get_json_from=get_json_from)
 
+
 # Date-Time Parser
 @main.context_processor
 def jinja_time_parser():
