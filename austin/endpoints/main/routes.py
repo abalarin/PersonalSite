@@ -1,13 +1,15 @@
-from flask import Blueprint, render_template, redirect
+from urllib.parse import urlparse
+
+from flask import Blueprint, render_template, redirect, request
 from flask_login import login_required
 
 from dateutil import parser, tz
 import datetime
 import requests
-from urllib.parse import urlparse
 
-from austin.endpoints.gallery.routes import *
-from austin.endpoints.main.utils import *
+# Home built Imports
+from austin.endpoints.gallery.routes import get_albums
+from .utils import github_feed, spotify_feed, authenticate_spotify
 from austin.models.site_models import Configuration
 from austin import Config, db
 
