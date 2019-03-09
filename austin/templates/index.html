@@ -20,6 +20,19 @@
 
 <hr>
 
+
+<div class="my-bitmoji-stickerpicker-icon-target"></div>
+<script>
+  // Load the SDK asynchronously
+  (function (d, s, id) {
+    var js, sjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://sdk.snapkit.com/js/v1/login_bitmoji.js";
+    sjs.parentNode.insertBefore(js, sjs);
+  }(document, 'script', 'bitmojikit-sdk'));
+</script>
+
 <div class="container-fluid homepage">
 
   <span id="albums"></span>
