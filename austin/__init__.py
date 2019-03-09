@@ -1,10 +1,9 @@
 from flask import Flask
-
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-from austin.config import Config
 
+from austin.config import Config
 from austin.botoConfig.configer import getConfig
 from austin.botoConfig.authBoto import botoClient, botoResource
 
@@ -24,9 +23,9 @@ def create_app(class_config=Config):
     # Init app contenxts
     db.init_app(app)
 
-    login_manager = LoginManager()
-    login_manager.init_app(app)
+    # Init Logi Manager
     from austin.models.user_models import load_user
+    login_manager.init_app(app)
     login_manager.user_loader(load_user)
 
     from austin.endpoints.main.routes import main
