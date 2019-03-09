@@ -1,17 +1,36 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
+from flask_login import login_user, logout_user, login_required, current_user
+
 from dateutil import parser, tz
 import datetime
 import requests
+import os
+from urllib.parse import urlparse
 
 from austin.endpoints.gallery.routes import *
-from austin import Config
+from austin.models.site_models import Configuration
+from austin import Config, db
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
 def index():
-    return render_template('index.html', albums=get_albums(), changelog=github_feed())
+    return render_template('index.html', albums=get_albums(), changelog=github_feed(), recently_played=spotify_feed(5))
+
+
+def spotify_feed(limit):
+    url = "https://api.spotify.com/v1/me/player/recently-played"
+
+    headers = {
+        'Authorization': "Bearer " + Configuration.query.get(1).spotify_code
+    }
+
+    querystring = { "limit" : "5" }
+    music = requests.get(url, data="", headers=headers, params=querystring)
+    print(('spotify: ' , music))
+
+    return(json.loads(music.text))
 
 
 @main.route('/changelog')
@@ -20,6 +39,50 @@ def change_log():
         'https://api.github.com/users/abalarin/events/public?access_token=' + Config.GITHUB_TOKEN).json()
     return render_template('changelog/github.html', changelog=github_feed)
 
+
+@main.route('/spotify')
+@login_required
+def spotify():
+    payload = {
+        'response_type': 'code',
+        'client_id': Config.SPOTIFY_ID,
+        'redirect_uri': Config.SPOTIFY_REDIRECT,
+        'scope': 'user-read-recently-played'
+    }
+    url = 'https://accounts.spotify.com/authorize'
+    response = requests.get(url, params=payload)
+
+    return redirect(response.url)
+
+# Spotify redirect callback
+@main.route('/callback/')
+def callback():
+
+    code = urlparse(request.url).query[5:]
+    authenticate_spotify(code)
+
+    return render_template('index.html', albums=get_albums(), changelog=github_feed(), recently_played='spotify_feed()')
+
+
+# Gets new spotify bearer token
+def authenticate_spotify(SPOTIFY_CODE):
+
+    code = "&code=" + SPOTIFY_CODE
+    grant_type = "grant_type=authorization_code"
+    redirect_uri = "&redirect_uri=" + Config.SPOTIFY_REDIRECT
+    client_id = "&client_id=" + Config.SPOTIFY_ID
+    client_secret = "&client_secret=" + Config.SPOTIFY_SECRET
+
+    payload = grant_type + code + redirect_uri + client_id + client_secret
+
+    headers = {'Content-Type': "application/x-www-form-urlencoded"}
+    url = 'https://accounts.spotify.com/api/token'
+    response = requests.post(url, data=payload, headers=headers)
+    access_token = json.loads(response.text)['access_token']
+
+    config = Configuration.query.get(1)
+    config.spotify_code = access_token
+    db.session.commit()
 
 
 @main.app_errorhandler(401)

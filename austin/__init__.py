@@ -32,6 +32,8 @@ class User(db.Model, UserMixin):
     admin = db.Column(db.Boolean, default=False)
     register_date = db.Column(db.DateTime(
         timezone=True), server_default=func.now())
+    password = db.Column(db.String(256))
+    spotify_code = db.Column(db.String(256))
 
     def __repr__(self):
         return(self.username + ", " + self.email)

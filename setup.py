@@ -8,9 +8,8 @@ setup(
         'flask',
         'flask-sqlalchemy',
         'flask-security',
-        'psycopg2',
+        'psycopg2-binary',
         'configparser',
         'requests',
-        'urllib',
     ]
 )
