@@ -8,7 +8,7 @@ import datetime
 import requests
 
 # Home built Imports
-from austin.endpoints.gallery.routes import get_albums
+from austin.endpoints.gallery.utils import get_albums
 from .utils import github_feed, spotify_feed, authenticate_spotify
 from austin.models.site_models import Configuration
 from austin import Config, db
@@ -76,7 +76,7 @@ def jinja_api_caller():
 
 # Date-Time Parser
 @main.context_processor
-def jinja_time_parger():
+def jinja_time_parser():
     def date_convert(date_time):
 
         # This assumes datetime is coming from Zulu/UTC zone & convert to EST

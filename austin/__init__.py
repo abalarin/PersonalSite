@@ -1,3 +1,5 @@
+# pylint: disable=E0611, E0401
+
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from flask import Flask
