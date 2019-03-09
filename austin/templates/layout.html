@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8">
   <title>Austin</title>
-  <!-- Import Global CSS -->
+
+  <!-- Import Homemade CSS's -->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/global.css') }}">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/animations.css') }}">
+
   <!-- Archivo Font  -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -25,6 +27,9 @@
 
   <!-- Import navbar component -->
   {% include 'includes/_navbar.html' %}
+
+  <!-- Import bitmoji char -->
+  {% include 'includes/_bitmoji.html' %}
 
   <div class="container content">
     {% include 'includes/_messages.html' %}

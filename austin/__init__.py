@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
@@ -19,6 +19,15 @@ def create_app(class_config=Config):
 
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    @app.before_request
+    def visits():
+        if 'visit_count' in session:
+            session['visit_count'] = session.get('visit_count') + 1
+        else:
+            session['visit_count'] = 1
+
+        print(session['visit_count'])
 
     # Init app contenxts
     db.init_app(app)

@@ -1,45 +1,10 @@
-<div class="my-bitmoji-stickerpicker-icon-target"></div>
-<script>
+{% if session['visit_count'] == 1 %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/bitmoji.css') }}">
+<script src="{{ url_for('static', filename='scripts/bitmoji.js') }}"></script>
 
-         window.snapKitInit = function () {
-          // Argument 1
-          var bitmojiWebPickerIconClass =
-            'my-bitmoji-stickerpicker-icon-target';
-
-          // Argument 2
-          var uiOptions = {
-            onStickerPickCallback:
-              function onStickerPickCallback(bitmojiImgURL){
-                console.log(bitmojiImgURL);
-              },
-            webpickerPosition: 'bottomLeft',
-          };
-
-          // Argument 3
-          var loginParamsObj = {
-            clientId: 'be26199e-9551-416c-93b0-149fc0d197cd',
-            redirectURI: 'https://austinbalarin.com',
-            scopeList: [ // the list of scopes you are approved for
-             'user.bitmoji.avatar',
-             'user.display_name',
-            ],
-          };
-
-          // Mount Bitmoji Icon(s)
-          snap.bitmojikit.mountBitmojiStickerPickerIcons(
-            bitmojiWebPickerIconClass,
-            uiOptions,
-            loginParamsObj,
-          );
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-          var js, sjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "https://sdk.snapkit.com/js/v1/login_bitmoji.js";
-          sjs.parentNode.insertBefore(js, sjs);
-        }(document, 'script', 'bitmojikit-sdk'));
-
-</script>
+<div class="bitmoji">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/10187876-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% endif %}
