@@ -7,6 +7,7 @@ class Configuration(db.Model):
     spotify_code = db.Column(db.String(256))
     spotify_access_token = db.Column(db.String(256))
     spotify_refresh_token = db.Column(db.String(256))
+    snap_client_id = db.Column(db.String(256))
 
     def __repr__(self):
         return(str(self.id) + ", " + self.name)

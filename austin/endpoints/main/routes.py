@@ -18,7 +18,8 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html', albums=get_albums(), changelog=github_feed(5), recently_played=spotify_feed(5))
+    snap_id = Configuration.query.get(1).snap_client_id
+    return render_template('index.html', albums=get_albums(), changelog=github_feed(5), recently_played=spotify_feed(5), snap_id=snap_id)
 
 
 @main.route('/changelog')
