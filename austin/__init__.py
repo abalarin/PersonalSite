@@ -26,6 +26,7 @@ def create_app(class_config=Config):
             session['visit_count'] = session.get('visit_count') + 1
         else:
             session['visit_count'] = 1
+        print(session['visit_count'])
 
     # Init app contenxts
     db.init_app(app)
