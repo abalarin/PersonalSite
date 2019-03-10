@@ -8,11 +8,19 @@
   </div>
 </div>
 {% elif session['visit_count'] % 3 == 0 %}
+{% if session['visit_count'] % 2 == 0 %}
 <div class="bitmoji bitmoji-left">
   <div class="icon animate-in">
     <img src="https://sdk.bitmoji.com/render/panel/10211153-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
   </div>
 </div>
+{% else %}
+<div class="bitmoji bitmoji-right">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/10211153-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% endif %}
 {% elif session['visit_count'] % 5 == 0 %}
 <div class="bitmoji bitmoji-left">
   <div class="icon animate-in">
