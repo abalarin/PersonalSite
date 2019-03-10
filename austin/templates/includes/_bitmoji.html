@@ -2,27 +2,51 @@
 <script src="{{ url_for('static', filename='scripts/bitmoji.js') }}"></script>
 
 {% if session['visit_count'] == 1 %}
-<div class="bitmoji">
+<div class="bitmoji bitmoji-right">
   <div class="icon animate-in">
     <img src="https://sdk.bitmoji.com/render/panel/10187876-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
   </div>
 </div>
-{% elif session['visit_count'] % 4 == 0 %}
-<div class="bitmoji">
+{% elif session['visit_count'] % 3 == 0 %}
+<div class="bitmoji bitmoji-left">
   <div class="icon animate-in">
-    <img src="https://sdk.bitmoji.com/render/panel/10211812-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+    <img src="https://sdk.bitmoji.com/render/panel/10208529-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
   </div>
 </div>
 {% elif session['visit_count'] % 5 == 0 %}
-<div class="bitmoji">
+<div class="bitmoji bitmoji-right">
   <div class="icon animate-in">
     <img src="https://sdk.bitmoji.com/render/panel/10211153-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
   </div>
 </div>
 {% elif session['visit_count'] % 7 == 0 %}
-<div class="bitmoji">
+<div class="bitmoji bitmoji-left">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/20002936-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% elif session['visit_count'] % 13 == 0 %}
+<div class="bitmoji bitmoji-right">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/10211812-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% elif session['visit_count'] % 17 == 0 %}
+<div class="bitmoji bitmoji-right">
   <div class="icon animate-in">
     <img src="https://sdk.bitmoji.com/render/panel/10221182-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% elif session['visit_count'] % 19 == 0 %}
+<div class="bitmoji bitmoji-left">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/10223291-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
+  </div>
+</div>
+{% elif session['visit_count'] % 23 == 0 %}
+<div class="bitmoji bitmoji-right">
+  <div class="icon animate-in">
+    <img src="https://sdk.bitmoji.com/render/panel/10219080-AVNINlJwj6dnrP9NblpR7lHo_odzPw-v1.png?transparent=1&palette=1" alt="">
   </div>
 </div>
 {% endif %}
