@@ -11,3 +11,16 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+.cursor-onhover:hover {
+  cursor: pointer;
+}
+
+.a-link {
+  color: #505653;
+}
+
+.a-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

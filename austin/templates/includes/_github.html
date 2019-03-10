@@ -13,9 +13,13 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5>
-              <a href="">{{change.actor.display_login}}</a>
+              <a onclick="hide_redirect('/')">
+                <span class="a-link">{{change.actor.display_login}}</span>
+              </a>
               acted on
-              <a href="">{{change.repo.name}}</a>
+              <a onclick="hide_redirect('/')">
+                <span class="a-link">{{change.repo.name}}</span>
+              </a>
             </h5>
             <p class="card-text"><small class="text-muted">Last updated {{date_convert(change.created_at)}}</small></p>
           </div>
@@ -27,7 +31,11 @@
   {% endfor %}
 
   <div class="text-center">
-    <h4> <a href="/changelog"> See More... </a></h4>
+    <h4>
+      <a onclick="hide_redirect('/changelog')">
+        <span class="a-link">See More...</span>
+      </a>
+    </h4>
   </div>
 
 </div>

@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
 
 <nav id="navbar-thing" class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">//abalarin</a>
+  <a class="navbar-brand cursor-onhover" onclick="hide_redirect('/')">
+    <span class="nav-title">//abalarin</span>
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,10 +12,10 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="#albums">/gallery</a>
+        <a class="nav-link cursor-onhover" onclick="hide_redirect('#albums')">/gallery</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#activity">/activity</a>
+        <a class="nav-link cursor-onhover" onclick="hide_redirect('#activity')">/activity</a>
       </li>
 
       {% if current_user.is_authenticated %}
@@ -35,7 +37,7 @@
 
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="/login">/login</a>
+        <a class="nav-link cursor-onhover" onclick="hide_redirect('/login')">/login</a>
       </li>
       {% endif %}
     </ul>

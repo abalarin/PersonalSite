@@ -9,27 +9,33 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5>
-              <a href="{{item['track']['external_urls']['spotify']}}">
-                {{item['track']['name']}}
+              {% set uri = item['track']['external_urls']['spotify'] %}
+              <a onclick="hide_redirect_newwindow('{{uri}}')">
+                <span class="a-link">{{item['track']['name']}}</span>
               </a>
             </h5>
             <h6>
-              <a href="{{item['track']['album']['artists'][0]['external_urls']['spotify']}}">
-                {{item['track']['album']['artists'][0]['name']}}
+              {% set uri = item['track']['album']['artists'][0]['external_urls']['spotify'] %}
+              <a onclick="hide_redirect_newwindow('{{uri}}')">
+                <span class="a-link">{{item['track']['album']['artists'][0]['name']}}</span>
               </a>
             </h6>
 
-            <p class="card-text"><small class="text-muted">Listend  {{date_convert(item['played_at'])}}</small></p>
+            <p class="card-text"><small class="text-muted">Listend {{date_convert(item['played_at'])}}</small></p>
           </div>
         </div>
       </div>
-  </div>
-  {% endfor %}
+    </div>
+    {% endfor %}
 
   </div>
 
   <div class="text-center">
-    <h4 class="text-center"> <a href="/music"> See More... </a></h4>
+    <h4 class="text-center">
+      <a onclick="hide_redirect('/music')">
+        <span class="a-link">See More...</span>
+      </a>
+    </h4>
   </div>
 
 </div>
