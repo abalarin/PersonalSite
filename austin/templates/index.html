@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'layouts/index_layout.html' %}
 
 {% block content %}
 
@@ -9,60 +9,73 @@
     <div class="col">
       <img class="profile" src="static/images/cover.png" alt="">
     </div>
+
     <div class="col align-self-center text-center">
       <h1>Welcome!</h1>
+
       <br>
+
       <h2>This is my site</h2>
-      <h4 class="text-muted">"I'd have to say my biggest accomplishment to date would have to be the stash..."</h4>
+      <h4 class="text-muted">
+        "I'd have to say my biggest accomplishment to date would have to be the stash..."
+      </h4>
     </div>
   </div>
 </div>
 
 <hr>
 
-<div class="container-fluid homepage">
+<div class="homepage">
 
-  <span id="albums"></span>
-  <h2 class="text-center">My Linode Object Storage Albums</h2>
-  <br>
-  {% include 'includes/_albums.html' %}
+  <div class="container-fluid" id="albums">
+    <h2 class="text-center">My Linode Object Storage Albums</h2>
 
-  <br>
-  <div class="row justify-content-md-center">
+    <br>
 
-    <div class="card gallery-card border rounded-0" id="image_container">
-      <div id="videosList">
-        <div class="video">
-          <video class="thevideo" onmouseover="this.play();this.muted = true" onmouseout="this.pause();" poster="transparent.png">
-            <source src="/static/media/video.mp4" type="video/mp4">
-            <source src="/static/media/video.webm" type="video/webm">
-            Your browser does not support the video tag.
-          </video>
+    {% include 'includes/_albums.html' %}
+
+    <br>
+
+    <div class="row justify-content-md-center">
+      <div class="card gallery-card border rounded-0" id="image_container">
+        <div id="videosList">
+          <div class="video">
+            <video class="thevideo" onmouseover="this.play();this.muted = true" onmouseout="this.pause();" poster="transparent.png">
+              <source src="/static/media/video.mp4" type="video/mp4">
+              <source src="/static/media/video.webm" type="video/webm">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <hr>
 
-  <span id="activity"></span>
-  <h2 class="text-center">My Activity</h2>
-  <br>
-  <div class="row">
-    <div class="col">
-      <h3 class="text-center text-muted">Changelog</h3>
-      <br>
-      {% include 'includes/_github.html' %}
-    </div>
+  <div class="container-fluid" id="activity">
+    <h2 class="text-center">My Activity</h2>
 
-    <div class="col">
-      <h3 class="text-center text-muted">Música</h3>
-      <br>
-      {% include 'includes/_spotify.html' %}
-    </div>
+    <br>
 
+    <div class="row">
+      <div class="col">
+        <h3 class="text-center text-muted">Changelog</h3>
+
+        <br>
+
+        {% include 'includes/_github.html' %}
+      </div>
+      <div class="col">
+        <h3 class="text-center text-muted">Música</h3>
+
+        <br>
+
+        {% include 'includes/_spotify.html' %}
+      </div>
+    </div>
   </div>
+
   <br>
 
 </div>
