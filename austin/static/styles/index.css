@@ -21,11 +21,17 @@ br {
   max-width: 600px;
   overflow: hidden;
 }
-
+.video video:hover {
+  cursor: pointer;
+}
 .video {
   height: 330px;
   width: 600px;
-  margin-bottom: 50px;
+  background: transparent url('/static/images/videocover.jpg') no-repeat 0 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 /* Hide Play button + controls on iOS */
