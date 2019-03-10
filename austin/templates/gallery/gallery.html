@@ -5,7 +5,7 @@
 
 <div class="card-columns">
   {% for link in links %}
-  <div class="card gallery-card border-0" id="image_container">
+  <div class="card gallery-card border rounded-0" id="image_container">
     <a data-toggle="modal" data-target="#exampleModalLong{{loop.index}}">
       <img alt="picture" src="{{link}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';">
     </a>
