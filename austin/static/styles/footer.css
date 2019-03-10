@@ -20,3 +20,10 @@
 #github {
   max-height: 40px;
 }
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  .footer span{
+    display: none;
+  }
+}
