@@ -95,6 +95,7 @@ def jinja_time_parser():
         # Remove the timezone awareness to calculate time difference
         old_time = old_time.replace(tzinfo=None)
         time_difference = (time_now - old_time).total_seconds()
+        print(time_difference)
 
         if time_difference < 60:
             return(str(int(time_difference)) + " seconds ago")
