@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 
-from flask import Blueprint, render_template, redirect, request
+from flask import Blueprint, render_template, redirect, request, url_for
 from flask_login import login_required
 
 from dateutil import parser, tz
@@ -56,7 +56,7 @@ def callback():
 
     authenticate_spotify()
 
-    return render_template('index.html', albums=get_albums(), changelog=github_feed(5), recently_played=spotify_feed(5))
+    return redirect(url_for('main.index'))
 
 
 @main.app_errorhandler(401)
