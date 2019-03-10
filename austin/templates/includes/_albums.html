@@ -1,27 +1,25 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/gallery.css') }}">
 
-<div class="container homepage" data-spy="scroll" data-target="#navbar-thing">
-  <div class="row">
-    {% for album in albums %}
-    <div class="col-md-4 fader" id="image_container">
-      <h3 class="text-center text-muted">{{album['Name']}}</h3>
-      <div class="card gallery-card border rounded-0" id="image_container">
+<div class="row">
+  {% for album in albums %}
+  <div class="col-md-4 fader" id="image_container">
+    <h3 class="text-center text-muted">{{album['Name']}}</h3>
+    <div class="card gallery-card border rounded-0" id="image_container">
 
-        {% set uri = album['Name'] + '/images' %}
-        <a onclick="hide_redirect('{{uri}}')">
-          <img src="{{album['images'][0]}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';" class="album_image">
-        </a>
-      </div>
-    </div>
-    {% endfor %}
-
-    {% if current_user.is_authenticated %}
-    <div class="col-md-4 fader" id="upload">
-      <h3 class="text-center text-muted">create album</h3>
-      <a href="/create/album">
-        <img src="/static/images/upload.png">
+      {% set uri = album['Name'] + '/images' %}
+      <a onclick="hide_redirect('{{uri}}')">
+        <img src="{{album['images'][0]}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';" class="album_image">
       </a>
     </div>
-    {% endif %}
   </div>
+  {% endfor %}
+
+  {% if current_user.is_authenticated %}
+  <div class="col-md-4 fader" id="upload">
+    <h3 class="text-center text-muted">create album</h3>
+    <a href="/create/album">
+      <img src="/static/images/upload.png">
+    </a>
+  </div>
+  {% endif %}
 </div>
