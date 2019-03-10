@@ -6,7 +6,9 @@
     <div class="col-md-4 fader" id="image_container">
       <h3 class="text-center text-muted">{{album['Name']}}</h3>
       <div class="card gallery-card border rounded-0" id="image_container">
-        <a href="/{{album['Name']}}/images">
+
+        {% set uri = album['Name'] + '/images' %}
+        <a onclick="hide_redirect('{{uri}}')">
           <img src="{{album['images'][0]}}" id="gallery_image" onerror="this.onerror=null;this.src='/static/images/noimage.png';" class="album_image">
         </a>
       </div>

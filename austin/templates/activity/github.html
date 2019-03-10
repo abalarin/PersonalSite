@@ -22,9 +22,17 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5>
-              <a href="{{get_json_from(change.actor.url).html_url}}">{{change.actor.display_login}}</a>
+              {% set uri = get_json_from(change.actor.url).html_url %}
+              <a onclick="hide_redirect_newwindow('{{uri}}')">
+                <span class="a-link">{{change.actor.display_login}}</span>
+              </a>
+
               acted on
-              <a href="{{get_json_from(change.repo.url).html_url}}">{{change.repo.name}}</a>
+
+              {% set uri = get_json_from(change.repo.url).html_url %}
+              <a onclick="hide_redirect_newwindow('{{uri}}')">
+                <span class="a-link">{{change.repo.name}}</span>
+              </a>
             </h5>
             <p class="card-text"><small class="text-muted">Last updated {{date_convert(change.created_at)}}</small></p>
           </div>
