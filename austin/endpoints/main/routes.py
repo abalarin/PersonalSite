@@ -10,7 +10,7 @@ import requests
 # Home built Imports
 from austin.endpoints.gallery.utils import get_albums
 from .spotify import spotify_feed, authenticate_spotify
-from .githu import github_feed
+from .github import github_feed
 from austin.models.site_models import Configuration
 from austin import Config, db
 
