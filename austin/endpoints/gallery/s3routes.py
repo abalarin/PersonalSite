@@ -2,12 +2,11 @@
 #  Not in use: These are some sample endpoints for CRUD functions of object Storage
 #
 
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, jsonify, request
 
 from austin import client, resource
 
 # BOTO STUFF
-import boto3
 from austin.botoConfig.objects import *
 
 
@@ -79,6 +78,7 @@ def Get_Object(bucket, object_key):
         print(e)
         return jsonify({"error": "There was a problem with the data you provided."})
 
+
 @gallery.route('/objects/<bucket>/<object_key>', methods=['POST'])
 def change_perms(bucket, object_key):
     try:
@@ -88,6 +88,7 @@ def change_perms(bucket, object_key):
     except Exception as e:
         print(e)
         return jsonify({"error": "There was a problem with the data you provided."})
+
 
 @gallery.route('/url/<bucket>/<object_id>', methods=['GET'])
 def geturl(bucket, object_id):

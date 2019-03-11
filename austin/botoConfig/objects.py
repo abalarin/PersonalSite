@@ -1,7 +1,3 @@
-import boto3
-import json
-
-
 def createBucket(client, name):
     client.create_bucket(Bucket=name)
 
@@ -59,8 +55,8 @@ def bucketPermissions(client, bucket):
 
 
 def changeBucketPermissions(resource, bucket):
-	bucket_acl = resource.BucketAcl(bucket)
-	bucket_acl.put(ACL="public-read")
+    bucket_acl = resource.BucketAcl(bucket)
+    bucket_acl.put(ACL="public-read")
 
 
 def getURL(client, bucket, obj_key):
