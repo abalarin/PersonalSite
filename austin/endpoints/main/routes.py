@@ -65,7 +65,7 @@ def callback():
 @main.app_errorhandler(405)
 @main.app_errorhandler(500)
 def error_404(error):
-    return render_template('404.html', e=error)
+    return render_template('errors/404.html', e=error)
 
 
 # This is too slow - optimize
