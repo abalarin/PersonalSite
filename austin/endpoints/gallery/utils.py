@@ -32,11 +32,12 @@ def get_albums():
         albums = list_albums()
         images = []
         for album in albums:
-            album = {
-                'Name': album['Name'],
-                'images': get_images(album['Name'])
-            }
-            images.append(album)
+            if album['Name'] != 'linodestuff':
+                album = {
+                    'Name': album['Name'],
+                    'images': get_images(album['Name'])
+                }
+                images.append(album)
 
         return images
 

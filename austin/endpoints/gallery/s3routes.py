@@ -10,10 +10,10 @@ from austin import client, resource
 from austin.botoConfig.objects import *
 
 
-gallery = Blueprint('gallery', __name__)
+boto3s = Blueprint('boto3s', __name__)
 
 
-@gallery.route('/buckets', methods=['GET'])
+@boto3s.route('/buckets', methods=['GET'])
 def get_buckets():
     try:
         results = listBuckets(client)
@@ -23,7 +23,7 @@ def get_buckets():
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/buckets', methods=['POST'])
+@boto3s.route('/buckets', methods=['POST'])
 def POST_make_bucket():
     try:
         post_values = request.get_json()
@@ -36,13 +36,13 @@ def POST_make_bucket():
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/objects/<bucket>', methods=['GET'])
+@boto3s.route('/objects/<bucket>', methods=['GET'])
 def GET_list_objects(bucket):
     results = listObjects(client, bucket)
     return jsonify(results)
 
 
-@gallery.route('/objects/<bucket>/<object_file>', methods=['POST'])
+@boto3s.route('/objects/<bucket>/<object_file>', methods=['POST'])
 def POST_add_object(bucket, object_file):
     try:
         files = request.files['file']
@@ -54,7 +54,7 @@ def POST_add_object(bucket, object_file):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/download/objects/<bucket>/<object_key>', methods=['GET'])
+@boto3s.route('/download/objects/<bucket>/<object_key>', methods=['GET'])
 def Download_Object(bucket, object_key):
     try:
         object = downloadObject(
@@ -65,7 +65,7 @@ def Download_Object(bucket, object_key):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/objects/<bucket>/<object_key>', methods=['GET'])
+@boto3s.route('/objects/<bucket>/<object_key>', methods=['GET'])
 def Get_Object(bucket, object_key):
     try:
         object = getObject(client, bucket, object_key)
@@ -79,7 +79,7 @@ def Get_Object(bucket, object_key):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/objects/<bucket>/<object_key>', methods=['POST'])
+@boto3s.route('/objects/<bucket>/<object_key>', methods=['POST'])
 def change_perms(bucket, object_key):
     try:
         # print("WORK" + ACP['Grants'][0]['Permission'])
@@ -90,7 +90,7 @@ def change_perms(bucket, object_key):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/url/<bucket>/<object_id>', methods=['GET'])
+@boto3s.route('/url/<bucket>/<object_id>', methods=['GET'])
 def geturl(bucket, object_id):
     try:
         object = getURL(client, bucket, object_id)
@@ -100,7 +100,7 @@ def geturl(bucket, object_id):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/location/<bucket>', methods=['GET'])
+@boto3s.route('/location/<bucket>', methods=['GET'])
 def getloco(bucket):
     try:
         object = getBucketLocation(client, bucket)
@@ -110,7 +110,7 @@ def getloco(bucket):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/curl/<bucket>', methods=['GET'])
+@boto3s.route('/curl/<bucket>', methods=['GET'])
 def createurl(bucket):
     try:
         createURL(client, bucket)
@@ -120,7 +120,7 @@ def createurl(bucket):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/bucketperm/<bucket>', methods=['GET'])
+@boto3s.route('/bucketperm/<bucket>', methods=['GET'])
 def getBucketPerms(bucket):
     try:
         return jsonify(bucketPermissions(client, bucket))
@@ -129,7 +129,7 @@ def getBucketPerms(bucket):
         return jsonify({"error": "There was a problem with the data you provided."})
 
 
-@gallery.route('/bucketperm/<bucket>', methods=['PUT'])
+@boto3s.route('/bucketperm/<bucket>', methods=['PUT'])
 def chgBucketPerms(bucket):
     try:
         changeBucketPermissions(resource, bucket)
