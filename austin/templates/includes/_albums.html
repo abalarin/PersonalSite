@@ -2,6 +2,7 @@
 
 <div class="row">
   {% for album in albums %}
+  {% if loop.index <= 6 %}
   <div class="col-md-4 fader" id="image_container">
     <h3 class="text-center text-muted">{{album['Name']}}</h3>
     <div class="card gallery-card border rounded-0" id="image_container">
@@ -12,6 +13,7 @@
       </a>
     </div>
   </div>
+  {% endif %}
   {% endfor %}
 
   {% if current_user.is_authenticated %}

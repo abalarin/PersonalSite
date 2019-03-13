@@ -70,6 +70,7 @@ def error_404(error):
 
 
 # This is too slow - optimize
+# Make this request from the client
 @main.context_processor
 def jinja_api_caller():
     def get_json_from(url):
