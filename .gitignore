@@ -1,6 +1,6 @@
 # Atom package manager
 flask
-
+pylintrc
 austin.egg-info
 setup.cfg
 
