@@ -38,9 +38,11 @@ def create_app(class_config=Config):
     from austin.endpoints.main.routes import main
     from austin.endpoints.users.routes import users
     from austin.endpoints.gallery.routes import gallery
+    from austin.endpoints.machinelearning.routes import ml
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(gallery)
+    app.register_blueprint(ml)
 
     return app

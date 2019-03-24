@@ -1,0 +1,20 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+
+<div class="body">
+  <form class="form-signin" action="/classify" method="POST">
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Ticket Body: </label>
+      <textarea class="form-control" name="ticket_body" rows="3"></textarea>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Classify!</button>
+  </form>
+</div>
+
+<div class="markdown">
+  {{md}}
+</div>
+
+{% endblock %}

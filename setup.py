@@ -11,6 +11,8 @@ setup(
         'psycopg2-binary',
         'configparser',
         'requests',
-        'boto3'
+        'boto3',
+        'tensorflow',
+        'markdown',
     ]
 )
