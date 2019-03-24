@@ -15,9 +15,9 @@ Once a text body is parsed into and array of size **n** words ie: ["A", "Quick",
 
 An example conversion for a text with a vocabulary size 10,000 might look like the following:
 
-1. "A quick brown fox jumps over the fence"
-2. ["A", "quick", "brown", "fox", "jumps", "over", "the", "fence"]
-3. [1, 5303, 9410, 9492, 7585, 5776, 520, 3212]
+1. `"A quick brown fox jumps over the fence"`
+2. `["A", "quick", "brown", "fox", "jumps", "over", "the", "fence"]`
+3. `[1, 5303, 9410, 9492, 7585, 5776, 520, 3212]`
 
 Where every word is mapped to an index between 1 and 10,000
 
@@ -28,13 +28,16 @@ Since every input might be a different length of words, when we pass it though t
 
 So if we say the padding is the size of the maximum amount of words in a single input, lets say 100, we might get an output like the following:
 
-1.  ["A", "quick", "brown", "fox", "jumps", "over", "the", "fence"]
-2.  [1, 5303, 9410, 9492, 7585, 5776, 520, 3212]
-3.  [   0    0    0    0    0    0    0    0    0    0    0    0    0    0
+1.  `["A", "quick", "brown", "fox", "jumps", "over", "the", "fence"]`
+2.  `[1, 5303, 9410, 9492, 7585, 5776, 520, 3212]`
+3.  `[   0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    0    0    0    0    0    0
         0    0    0    0    0    0    0    0    1 5303 9410 9492 7585 5776
-     520 3212]
+     520 3212]`
+
+
+##### *To be continued...*
