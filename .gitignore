@@ -1,6 +1,6 @@
 # Atom package manager
 flask
-
+pylintrc
 austin.egg-info
 setup.cfg
 
@@ -13,6 +13,7 @@ austin/endpoints/__pycache__
 austin/endpoints/main/__pycache__
 austin/endpoints/users/__pycache__
 austin/endpoints/gallery/__pycache__
+austin/endpoints/machinelearning/__pycache__
 
 austin/botoConfig/__pycache__
 
