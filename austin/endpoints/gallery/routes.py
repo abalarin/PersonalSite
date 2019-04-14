@@ -33,10 +33,10 @@ def get_images(album):
         return abort(404)
 
 
-@gallery.route('/create/album', methods=['GET'])
-@login_required
-def create_album():
-    if request.method == "POST":
-        return render_template('gallery/add_album.html')
-
-    return render_template('gallery/add_album.html')
+# @gallery.route('/create/album', methods=['GET'])
+# @login_required
+# def create_album():
+#     if request.method == "POST":
+#         return render_template('gallery/add_album.html')
+#
+#     return render_template('gallery/add_album.html')
