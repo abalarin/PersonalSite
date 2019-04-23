@@ -40,3 +40,4 @@ def get_images(album):
 #         return render_template('gallery/add_album.html')
 #
 #     return render_template('gallery/add_album.html')
+# 
