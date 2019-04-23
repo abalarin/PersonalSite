@@ -1,49 +1,57 @@
 {% extends 'layouts/layout.html' %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/github.css') }}">
 
-<div class="container-fluid">
-  <div class="text-center">
+<body onload="github()">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/github.css') }}">
 
-    <h2>This is my changelog</h2>
-    <h4 class="text-muted">Want to see how I've changed the internet?</h4>
-  </div>
-  <hr>
+  <script type="text/javascript">
+    function github() {
+      $.getJSON("/githubjson/25", function(result) {
+        $.each(result, function(i, field) {
+          $.getJSON(field.actor.url, function(actor_result) {
+            $.getJSON(field.repo.url, function(repo_result) {
 
-  {% for change in changelog %}
-  <div class="row">
+              $(".feed").append(
+              '<div class="card container-fluid border rounded-0">'+
+                '<div class="row no-gutters">'+
+                  '<div class="col avatar">' +
+                      '<img id="github_avatar" src="'+field.actor.avatar_url+'" alt="...">'+
+                    '</div>' +
 
-    <div class="card container-fluid border rounded-0">
-      <div class="row no-gutters">
-        <div class="col avatar">
-          <img id="github_avatar" src="{{change.actor.avatar_url}}" alt="">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5>
-              {% set uri = get_json_from(change.actor.url).html_url %}
-              <a onclick="hide_redirect_newwindow('{{uri}}')">
-                <span class="a-link">{{change.actor.display_login}}</span>
-              </a>
+                    '<div class="col-md-8">'+
+                      '<div class="card-body">'+
+                        '<h5>'+
+                          '<a href="'+ actor_result.html_url +'">'+
+                            '<span class="a-link" style="font-weight:bold; font-size:18px;">'+ field.actor.display_login+'</span>'+
+                          '</a>' +
+                          ' '+ field.type +' ' +
+                          '<a href="' + repo_result.html_url +'">' +
+                            '<span class="a-link" style="font-weight:bold; font-size:18px;">'+ field.repo.name+'</span>'+
+                          '</a>'+
+                        '</h5>' +
+                        '<p class="card-text"><small class="text-muted">' +
+                          field.created_at +
+                        '</small></p>' +
+                      '</div>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>'
+              );
 
-              acted on
+            });
+          });
+        });
+      });
+    }
+  </script>
 
-              {% set uri = get_json_from(change.repo.url).html_url %}
-              <a onclick="hide_redirect_newwindow('{{uri}}')">
-                <span class="a-link">{{change.repo.name}}</span>
-              </a>
-            </h5>
-            <p class="card-text"><small class="text-muted">Last updated {{date_convert(change.created_at)}}</small></p>
-          </div>
-        </div>
-      </div>
+
+  <div class="container">
+    <div class="feed">
+
     </div>
-
-    <hr>
   </div>
-  <hr>
-  {% endfor %}
-</div>
+</body>
 
 {% endblock %}

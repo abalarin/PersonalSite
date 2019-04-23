@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 
-from flask import Blueprint, render_template, redirect, request, url_for
+from flask import Blueprint, render_template, redirect, request, url_for, jsonify
 from flask_login import login_required
 
 from dateutil import parser, tz
@@ -25,7 +25,11 @@ def index():
 
 @main.route('/changelog')
 def change_log():
-    return render_template('activity/github.html', changelog=github_feed(15))
+    return render_template('activity/github.html')
+
+@main.route('/githubjson/<count>')
+def githubjson(count):
+    return jsonify(github_feed(count))
 
 
 @main.route('/music')
