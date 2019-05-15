@@ -68,6 +68,13 @@ def github_feed(limit):
             event['type'] = ' created repo'
         if event['type'] == 'DeleteEvent':
             event['type'] = ' deleted repo'
+        if event['type'] == 'IssueCommentEvent':
+            event['type'] = ' commented on'
+        if event['type'] == 'IssuesEvent':
+            if event['payload']['action'] == 'closed':
+                event['type'] = 'closed out an issue on'
+            elif event['payload']['action'] == 'opened':
+                event['type'] = 'opened an issue on '
 
         event['created_at'] = date_convert(event['created_at'])
 
