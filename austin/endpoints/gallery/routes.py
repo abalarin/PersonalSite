@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, abort
 from flask_login import login_required
 
-from .utils import list_albums, list_images, get_URL
+from .utils import list_albums, get_images
 
 
 gallery = Blueprint('gallery', __name__)
@@ -18,15 +18,9 @@ def get_buckets():
 
 
 @gallery.route('/<album>/images', methods=['GET'])
-def get_images(album):
+def get_album(album):
     try:
-        results = list_images(album)
-        links = []
-        for result in results:
-            url = get_URL(album, result)['url']
-            links.append(url + '/' + result)
-
-        return render_template('gallery/gallery.html', links=links)
+        return render_template('gallery/gallery.html', links=get_images(album))
 
     except Exception as e:
         print(e)
@@ -40,4 +34,4 @@ def get_images(album):
 #         return render_template('gallery/add_album.html')
 #
 #     return render_template('gallery/add_album.html')
-# 
+#

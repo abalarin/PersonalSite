@@ -23,23 +23,27 @@ def add_image(permisson, album, file_object, filename):
     client.put_object(ACL=permisson, Body=file_object, Bucket=album, Key=filename, ContentType='image/jpeg')
 
 
-def get_URL(album, file_name):
-    return client.generate_presigned_post(Bucket=album, Key=file_name)
+def get_URL(file_name):
+    return client.generate_presigned_post(Bucket='austin', Key=file_name)
 
 
 def get_albums():
     try:
-        albums = list_albums()
-        images = []
-        for album in albums:
-            if album['Name'] != 'linodestuff':
-                album = {
-                    'Name': album['Name'],
-                    'images': get_images(album['Name'])
-                }
-                images.append(album)
 
-        return images
+        result = client.list_objects(Bucket='austin', Prefix='albums/', Delimiter='/')
+        album_names = []
+        for object in result.get('CommonPrefixes'):
+            album_names.append(object['Prefix'][6:].strip('/'))
+
+        albums = []
+        for album_name in album_names:
+            album = {
+                'Name': album_name,
+                'images': get_images(album_name)
+            }
+            albums.append(album)
+
+        return albums
 
     except Exception as e:
         print(e)
@@ -48,13 +52,21 @@ def get_albums():
 
 def get_images(album):
     try:
-        results = list_images(album)
-        links = []
-        for result in results:
-            url = get_URL(album, result)['url']
-            links.append(url + '/' + result)
 
-        return(links)
+        prefix = 'albums/' + str(album) + '/'
+        result = client.list_objects(Bucket='austin', Prefix=prefix, Delimiter='/')
+
+        image_urls = []
+        skipthedir = 0  # becuase the directory itself is also retrived we want to skip it
+        for object in result.get('Contents'):
+            if skipthedir > 0:
+                url = get_URL(object.get('Key'))
+                image_urls.append(url.get('url') + '/' + url.get('fields')['key'])
+            else:
+                skipthedir += 1
+
+        return image_urls
+
 
     except Exception as e:
         print(e)
