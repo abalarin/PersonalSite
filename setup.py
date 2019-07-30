@@ -14,5 +14,6 @@ setup(
         'boto3',
         'tensorflow',
         'markdown',
+        'medium',
     ]
 )
