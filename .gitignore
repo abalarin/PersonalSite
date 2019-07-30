@@ -3,7 +3,8 @@ flask
 pylintrc
 austin.egg-info
 setup.cfg
-config.json
+
+austin/config.json
 
 # austin/config.py
 
